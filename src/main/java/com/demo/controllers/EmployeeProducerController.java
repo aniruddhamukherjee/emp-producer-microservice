@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.beans.factory.annotation.Autowired;
 
 @RestController
 public class EmployeeProducerController {
@@ -15,14 +16,13 @@ public class EmployeeProducerController {
     public Employee firstPage(@PathVariable String empId) {
 
         Employee emp = new Employee();
-        emp.setName("Aniruddha");
-        emp.setDesignation("Senior Developer");
+        emp.setName("Aniruddha Mukherjee");
+        emp.setDesignation("Data Engineering " +
+                "Lead");
         emp.setEmpId(empId);
-        emp.setBusinessUnit("CMI-Telecom");
+        emp.setBusinessUnit("UBM-Informa");
 
-        if("5".equals(empId)) {    // fallback
-            throw new RuntimeException();
-        }
+        Integer.parseInt(empId) ; //fallback
 
         return emp;
     }
@@ -30,9 +30,9 @@ public class EmployeeProducerController {
     public Employee getDataFallBack(String empId) {
 
         Employee emp = new Employee();
-        emp.setName("fallback-emp1");
-        emp.setDesignation("fallback-developer");
-        emp.setEmpId("fallback-1");
+        emp.setName("fallback-employee-name");
+        emp.setDesignation("fallback-employee-designation");
+        emp.setEmpId("fallback-emp-id");
         emp.setBusinessUnit("fallback-BU");
 
         return emp;
@@ -42,7 +42,7 @@ public class EmployeeProducerController {
     @RequestMapping(value = "/healthCheck",
             method = RequestMethod.GET)
 
-    public String healthCheck()  {
+    public String healthCheck() {
 
         return "Success";
     }
